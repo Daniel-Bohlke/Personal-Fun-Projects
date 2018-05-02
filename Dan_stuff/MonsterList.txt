@@ -1,0 +1,11 @@
+Monster List
+--
+Goblin
+  3   10   10   10   10   10  5
+Lvl  mHP  Atk  Def  Spd  ExG  G
+A goblin warrior, roaming the lands and ravaging villages. Surprising given how weak it is...
+--
+The Punisher (Boss)
+ 25  300  170  100   80  3500  630
+Lvl  mHP  Atk  Def  Spd  ExG    G
+A brutal warlord who has wandered the plains in search of revenge for his entire race of giant brutal creatures that were wiped out by the Elves. As the only survivor, he continues to hunt all who stand in his way (but Elves are his favorite to punish)

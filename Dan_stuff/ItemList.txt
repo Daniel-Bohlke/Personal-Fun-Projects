@@ -1,0 +1,63 @@
+Item List
+NOTE: Use abbreviations for stats
+Attack = Atk
+Speed = Spd
+Defense = Def
+--
+A Small Health Potion
+  1    100         20    +    HP   30
+Lvl  price  sellprice  mod  stat  amt
+This is a small potion used for healing minor wounds. Restores 30 HP
+--
+Punisher's Axe
+ 25   9000       1200    +   Atk   35
+Lvl  price  sellprice  mod  stat  amt
+A large hulking double-sided axe once belonging to the fierce Punisher. Legend says this Axe still holds the souls of it's many victims.
+--
+A Medium Health Potion
+ 20    800         60    +    HP  100
+Lvl  price  sellprice  mod  stat  amt
+This is a medium potion used for healing deep cuts and minor fractures. Restores 100 HP
+--
+Training Sword
+  1    100         10    +   Atk    3
+Lvl  price  sellprice  mod  stat  amt
+A sword used for training warriors how to fight. Not very useful for combat however
+--
+Training Bow
+  1    100         10    +   Spd    3
+Lvl  price  sellprice  mod  stat  amt
+A bow used for training archers how to shoot. Not very useful for combat however
+--
+Training Staff
+  1    100         10    +   Atk    3
+Lvl  price  sellprice  mod  stat  amt
+A staff used for training mages in the art of magic. Not exceptionally powerful however
+--
+Training Shield
+  1    100         10    +   Def    3
+Lvl  price  sellprice  mod  stat  amt
+A shield used for training warriors how to fight. Not very useful for combat however
+--
+Training Stave
+  1    100         10    +    HP    8
+Lvl  price  sellprice  mod  stat  amt
+A stave used for training healers in the art of healing. Not exceptionally powerful however
+--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
