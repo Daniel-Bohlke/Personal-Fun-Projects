@@ -1,13 +1,17 @@
 package com.RoadsToAdventure.game;
 
-import com.RoadsToAdventure.model.*;
-
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
-import com.RoadsToAdventure.enums.*;
+import com.RoadsToAdventure.enums.PlayerClass;
+import com.RoadsToAdventure.model.Boss;
+import com.RoadsToAdventure.model.Equipable;
+import com.RoadsToAdventure.model.Monster;
+import com.RoadsToAdventure.model.Player;
 
 /**
  * 
@@ -21,14 +25,24 @@ public class Game extends Canvas implements Runnable{
 	private boolean isRunning = false;
 	private Thread thread;
 	private Handler handler;
+	private Camera camera;
+	
+	private BufferedImage level1 = null;
 	
 	public Game(){
 		new Window(1000, 563, "Roads To Adventure", this);
 		start();
 		
 		this.handler = new Handler();
+		this.camera = new Camera(0,0);
 		this.addKeyListener(new KeyInput(handler));
 		
+		BufferedImageLoader loader = new BufferedImageLoader();
+		level1 = loader.loadImage("/Level.png");
+		
+		loadLevel(level1);
+		
+		/**
 		this.handler.addObject(new Player(PlayerClass.MAGE, 100, 100, this.handler));
 		this.handler.addObject(new Civilian(200, 100));
 		try {
@@ -37,6 +51,8 @@ public class Game extends Canvas implements Runnable{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		*/
+		
 	}
 	
 	private void start(){
@@ -82,6 +98,13 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void tick(){
+		
+		for(int i = 0; i < handler.object.size(); i++){
+			if(handler.object.get(i).getId() == ID.Player){
+				camera.tick(handler.object.get(i));
+			}
+		}
+			
 		handler.tick();
 	}
 	
@@ -93,17 +116,60 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		Graphics g = bs.getDrawGraphics();
+		Graphics2D g2d = (Graphics2D) g;
 		////////////////////////////////////////
 		
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 1000, 563);
 		
+		g2d.translate(-camera.getX(), -camera.getY());
+		
+		
 		//Important that handler renders after background or else background will be on top of everything
 		handler.render(g);
+		
+		g2d.translate(camera.getX(), camera.getY());
 		
 		////////////////////////////////////////
 		g.dispose();
 		bs.show();
+	}
+	
+	//Load Level Screen
+	private void loadLevel(BufferedImage image){
+		int w = image.getWidth();
+		int h = image.getHeight();
+		
+		
+		for(int xx = 0; xx < w; xx++){
+			for(int yy = 0; yy < h; yy++){
+				int pixel = image.getRGB(xx, yy);
+				int red = (pixel >> 16) & 0xff;
+				int green = (pixel >> 8) & 0xff;
+				int blue = (pixel) & 0xff;
+				
+				if(red == 255){
+					handler.addObject(new Block(xx*32, yy*32, ID.Block));
+				}
+				if(blue == 255 && green == 0){
+					handler.addObject(new Player(PlayerClass.MAGE, xx*32, yy*32, this.handler));
+				}
+				if(green == 255 && blue == 0){
+					try {
+						handler.addObject(new Monster("Goblin", xx*32, yy*32, this.handler));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if(blue == 255 && green == 255){
+					try {
+						handler.addObject(new Boss("The Punisher (Boss)", new Equipable("Punisher's Axe", "Weapon"), xx*32, yy*32, this.handler));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 	
 	public static void main(String args[]){

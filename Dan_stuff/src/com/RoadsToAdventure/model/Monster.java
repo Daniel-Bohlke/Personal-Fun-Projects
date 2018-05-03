@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.io.File;
+import java.util.Random;
 import java.util.Scanner;
 
+import com.RoadsToAdventure.game.GameObject;
+import com.RoadsToAdventure.game.Handler;
 import com.RoadsToAdventure.game.ID;
 
 /**
@@ -23,11 +26,16 @@ public class Monster extends CharacterClass {
 	public String description;
 	//checks if monster is still alive
 	public boolean alive;
+	//Handler
+	//private Handler handler;
+	Random r = new Random();
+	int choose = 0;
 	
 	//All of the monster's traits are determined by level
 	@SuppressWarnings("resource")
-	public Monster(String name, int x, int y) throws Exception{
+	public Monster(String name, int x, int y, Handler handler) throws Exception{
 		super(x, y, ID.Monster);
+		this.handler = handler;
 		this.name = name;
 		File list = new File("MonsterList.txt");
 		Scanner read = new Scanner(list);
@@ -163,6 +171,29 @@ public class Monster extends CharacterClass {
 		this.x += velX;
 		this.y += velY;
 		
+		choose = r.nextInt(10);
+		
+		for(int i = 0; i < this.handler.getObject().size(); i++){
+			GameObject temp = handler.getObject().get(i);
+			
+			if(temp.getId() == ID.Block){
+				if(getBoundsBig().intersects(temp.getBounds())){
+					x += (velX*5) * -1;
+					y += (velY*5) * -1;
+					velX *= -1;
+					velY *= -1;
+				}
+				else if(choose == 0){
+					velX = (r.nextInt(4 - -4) + - 4);
+					velY = (r.nextInt(4 - -4) + - 4);
+				}
+			}
+			
+			if(temp.getId() == ID.Player){
+				//TODO: Call combat window
+			}
+		}
+		
 	}
 
 	@Override
@@ -172,11 +203,12 @@ public class Monster extends CharacterClass {
 		
 	}
 
-	@Override
 	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Rectangle(x, y, 32, 32);
 	}
 
+	public Rectangle getBoundsBig() {
+		return new Rectangle(x-16, y-16, 64, 64);
+	}
 }
 

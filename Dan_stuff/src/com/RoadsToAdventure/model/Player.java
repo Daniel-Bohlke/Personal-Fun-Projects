@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import com.RoadsToAdventure.enums.PlayerClass;
+import com.RoadsToAdventure.game.GameObject;
 import com.RoadsToAdventure.game.Handler;
 import com.RoadsToAdventure.game.ID;
 
@@ -27,7 +28,7 @@ public class Player extends CharacterClass {
 	//Checks if Player is alive
 	public boolean alive = true;
 	//Handler
-	public Handler handler;
+	//public Handler handler;
 	
 	Location location;
 	
@@ -319,6 +320,8 @@ public class Player extends CharacterClass {
 		this.x += velX;
 		this.y += velY;
 		
+		collision();
+		
 		if(handler.isDown()) velY = 5;
 		else if(!handler.isUp()) velY = 0;
 		
@@ -330,6 +333,23 @@ public class Player extends CharacterClass {
 		
 		if(handler.isRight()) velX = 5;
 		else if(!handler.isLeft()) velX = 0;
+	}
+	
+	private void collision(){
+		for(int i = 0; i < this.handler.getObject().size(); i++){
+			
+			GameObject temp = this.handler.getObject().get(i);
+			
+			if(temp.getId() == ID.Block){
+				
+				if(getBounds().intersects(temp.getBounds())){
+					x += velX * -1;
+					y += velY * -1;
+				}
+				
+			}
+			
+		}
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.RoadsToAdventure.model;
 import java.util.ArrayList;
 
 import com.RoadsToAdventure.game.GameObject;
+import com.RoadsToAdventure.game.Handler;
 import com.RoadsToAdventure.game.ID;
 
 /**
@@ -39,6 +40,8 @@ public abstract class CharacterClass extends GameObject {
 	public int Level;
 	//This shows the character's current Experience Points
 	public double Exp;
+	//Handler
+	protected Handler handler;
 	//These are the Character's Skills
 	//public ArrayList<Skill> Skills = new ArrayList<Skill>();
 	
