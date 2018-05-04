@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.RoadsToAdventure.enums.OwnerType;
-import com.RoadsToAdventure.game.Map;
-import com.RoadsToAdventure.game.TileType;
-import com.RoadsToAdventure.model.Location;
-import com.RoadsToAdventure.model.ShopOwner;
+import daybreak_enums.OwnerType;
+import daybreak_game.Map;
+import daybreak_game.TileType;
+import daybreak_model.Location;
+import daybreak_model.ShopOwner;
 
 /**
  * 

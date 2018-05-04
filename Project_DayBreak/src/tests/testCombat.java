@@ -3,9 +3,10 @@ package tests;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import com.RoadsToAdventure.model.*;
-import com.RoadsToAdventure.enums.*;
-import com.RoadsToAdventure.game.Handler;
+
+import daybreak_enums.*;
+import daybreak_game.Handler;
+import daybreak_model.*;
 
 /**
  * 

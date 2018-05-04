@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.RoadsToAdventure.enums.PlayerClass;
-import com.RoadsToAdventure.game.Handler;
-import com.RoadsToAdventure.model.Equipable;
-import com.RoadsToAdventure.model.Item;
-import com.RoadsToAdventure.model.Player;
+import daybreak_enums.PlayerClass;
+import daybreak_game.Handler;
+import daybreak_model.Equipable;
+import daybreak_model.Item;
+import daybreak_model.Player;
 /**
  * 
  * @author Daniel Bohlke
